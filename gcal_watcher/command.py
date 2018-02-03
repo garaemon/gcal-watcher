@@ -1,6 +1,6 @@
 import datetime
-from threading import Thread
 import json
+from threading import Thread
 
 import requests
 
@@ -56,10 +56,9 @@ class Command(object):
         return True
 
     @classmethod
-    def replace_vars(_cls, string, event_date):
-        today = event_date
-        yesterday = event_date + datetime.timedelta(days=-1)
-        tomorrow = event_date + datetime.timedelta(days=1)
+    def replace_vars(_cls, string, today, yesterday=None, tomorrow=None):
+        yesterday = yesterday or today + datetime.timedelta(days=-1)
+        tomorrow = tomorrow or today + datetime.timedelta(days=1)
         replace_rules = {
             '${today.year}': '%04d' % today.year,
             '${today.month}': '%02d' % today.month,
