@@ -19,7 +19,7 @@ import dateutil.parser
 # at ~/.credentials/calendar-python-quickstart.json
 SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
 CLIENT_SECRET_FILE = os.path.expanduser('~/.config/raspi_home/google_calendar_client_id.json')
-APPLICATION_NAME = 'raspi_home'
+APPLICATION_NAME = os.environ['GCAL_WATCHER_GCAL_APPLICATION_NAME']
 
 
 def get_credentials():
@@ -113,7 +113,8 @@ def create_dummy_event(date, description):
 if __name__ == '__main__':
     # verify_client_id()
     get_credentials()
-    gcalclient = GCalClient('raspi_tasks', os.environ['GCAL_WATCHER_CALENDAR_ID'])
+    gcalclient = GCalClient(os.environ['GCAL_WATCHER_CALENDAR_NAME'],
+                            os.environ['GCAL_WATCHER_CALENDAR_ID'])
     for event in gcalclient.get_upcoming_events(10):
         #print(event)
         event_date = parse_start_datetime(event)

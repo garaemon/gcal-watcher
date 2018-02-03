@@ -9,7 +9,8 @@ import fire
 PROJECT_NAME = 'gcal-watcher'
 SERVICE_FILE = 'tools/gcal-watcher.service'
 COPY_ENVIRONMENTAL_VARIABLES = [
-    'LOGGLY_TOKEN', 'IFTTT_KEY', 'GCAL_WATCHER_CALENDAR_ID'
+    'LOGGLY_TOKEN', 'IFTTT_KEY', 'GCAL_WATCHER_CALENDAR_ID',
+    'GCAL_WATCHER_CALENDAR_NAME', 'GCAL_WATCHER_GCAL_APPLICATION_NAME'
 ]
 COPY_FILES = {
     '~/.raspi-home-secrets/calendar-python-quickstart.json':
