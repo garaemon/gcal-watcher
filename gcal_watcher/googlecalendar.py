@@ -7,13 +7,13 @@ import datetime
 import json
 import logging
 import os
+import re
 
-from googleapiclient.discovery import build
-import httplib2
-from oauth2client import client
-from oauth2client.file import Storage
-from oauth2client import tools
 import dateutil.parser
+import httplib2
+from googleapiclient.discovery import build
+from oauth2client import client, tools
+from oauth2client.file import Storage
 
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/calendar-python-quickstart.json
@@ -82,12 +82,8 @@ class GCalClient(object):
         return events_result.get('items', [])
 
 
-def remove_ptag(description):
-    if description.startswith('<p>'):
-        description = description[len('<p>'):]
-    if description.endswith('</p>'):
-        description = description[:-len('</p>')]
-    return description
+def remove_tag(description):
+    return re.sub(r'<.*?>', '', description)
 
 
 def parse_start_datetime(event):
@@ -98,9 +94,9 @@ def parse_start_datetime(event):
 
 def get_description(event):
     try:
-        return json.loads(remove_ptag(event['description']))
+        return json.loads(remove_tag(event['description']))
     except Exception as e:
-        print('Failed to parse', remove_ptag(event['description']))
+        print('Failed to parse', remove_tag(event['description']))
         raise e
 
 
