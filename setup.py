@@ -49,6 +49,12 @@ an incredible python package
     install_requires=[
         # add your dependencies here
         # remember to use 'package-name>=x.y.z,<x.y+1.0' notation (this way you get bugfixes)
+        'apiclient',
+        'google-api-python-client',
+        'python-dateutil',
+        'requests',
+        'fire',
+        'pytz'
     ],
     extras_require={
         'tests': tests_require,
@@ -56,7 +62,8 @@ an incredible python package
     entry_points={
         'console_scripts': [
             # add cli scripts here in this form:
-            # 'gcal-watcher=gcal_watcher.cli:main',
+            'gcal-watcher=gcal_watcher.cli:main',
+            'gcal-watcher-deploy=gcal_watcher.deploy:main',
         ],
     },
 )
